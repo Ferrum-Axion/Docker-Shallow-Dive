@@ -2,7 +2,7 @@
 ######################################
 # created by: Aviv 
 # purpose: Practice 139 solution
-# version: 0.0.1
+# version: 0.0.2
 # date: 2026-02-23
 ######################################
 set -o errexit
@@ -25,4 +25,4 @@ docker volume inspect mysql-data
 docker run -d --name mysql2 -e MYSQL_ROOT_PASSWORD=pass -v mysql-data:/var/lib/mysql mysql:8
 
 #Verify data is intact
-docker exec mysql2 ls /var/lib/mysql
+docker inspect mysql2
