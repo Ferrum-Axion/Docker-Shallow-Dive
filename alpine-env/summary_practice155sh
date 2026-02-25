@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+####################################
+# Created by: Yaron
+# Purpose: homework Page 155 
+# Date: 25.02.2026
+# Version: 0.0.1
+set -o errexit
+set -o pipefail
+set -o nounset
+###################################
+
+function main {
+   printf "Delete all older conatiners and images\n"
+   if ! cleanup;
+   then
+      printf "Could not delete all, please check and retry\n"
+      exit 1
+   fi
+   printf "Trying to build alpine docker and run container of it\n"
+   if ! buildandrun;
+   then
+       printf "Could not build image or run container, please check and retry\n"
+       exit 1
+   fi  
+   printf "Cleaning up\n"
+   if ! cleanup;
+   then
+      printf "Could not delete all, please check and retry\n"
+      exit 1
+   fi 
+}
+
+
+function cleanup() {
+    if [[ $(docker container ps -a -q | wc -l ) -gt 0 ]];
+    then 
+        docker container stop $(docker container ps -a -q)
+        docker container rm $(docker container ps -a -q)
+    fi
+    if [[ $(docker images ps -q | wc -l ) -gt 0 ]];
+    then 
+        docker images rm $(docker image ps -q)
+    fi
+    return 0
+}
+
+function buildandrun {
+    docker build -t my-alpine-nginx:0.0.1 --build-arg USER=ninja .
+    docker run -d my-alpine-nginx:0.0.1
+    return 0
+}
+
+
+
+
+#################33
+main

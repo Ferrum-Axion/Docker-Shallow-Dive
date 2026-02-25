@@ -16,21 +16,26 @@ function main {
    if ! cleanup $cleannetwork;
    then
       printf "Could not delete all, please check and retry\n"
+      exit 1
    fi
    printf "trying to create new containers and new network\n"
    if ! createcontainer;
    then
        printf "Could not create new network and containers, please check and retry\n"
+       exit 1
    fi  
    printf "trying to ping from alpine to ubuntu/apache2 (should fail)\n"
    if ! checkping;
    then
        printf "failed to ping from alpine to ubuntu/apache2, please check and retry\n"
+       exit 1
    fi    
    printf "Cleaning up\n"
+   cleannetwork="true"
    if ! cleanup $cleannetwork;
    then
       printf "Could not delete all, please check and retry\n"
+      exit 1
    fi 
 }
 
