@@ -1,0 +1,8 @@
+services:
+  ssh-server:
+    build: .
+    ports:
+      - "2222:22"
+    volumes:
+      - .:/project
+    restart: unless-stopped
