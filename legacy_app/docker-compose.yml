@@ -1,0 +1,10 @@
+services:
+   sshserver:
+      build: .
+      container_name: sshserver
+      ports:
+        - "2222:22"
+      volumes:
+        - ./:/project
+      restart: unless-stopped
+  
