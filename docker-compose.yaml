@@ -1,0 +1,9 @@
+ services:
+  ssh:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ssh_pub_key=${SSH_PUB_KEY}
+    volumes:
+      - .:/app
