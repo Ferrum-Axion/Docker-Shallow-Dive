@@ -1,0 +1,9 @@
+services:
+  ssh-server:
+    build: .
+    image: ssh-server-image
+    container_name: ssh-server-container
+    ports:
+      - 2222:22
+    volumes:
+      - .:/project
