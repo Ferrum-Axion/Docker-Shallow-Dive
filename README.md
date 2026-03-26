@@ -43,7 +43,18 @@ This small project demonstrates running an SSH server inside a Docker container.
 ## Notes about the Dockerfile
 
 - The image is based on `debian:latest` and installs `openssh-server`.
-- For demonstration convenience the Dockerfile sets a root password and permits root login. This is insecure and must NOT be used in production.
+
+
+## Standalone (no docker-compose)
+
+If you prefer to run the image directly without `docker-compose`, build the image then run with `docker run`.
+
+Basic run (detached):
+
+```bash
+docker build -t ssh-server-image .
+docker run -d --name ssh-server-container -p 2222:22 ssh-server-image
+```
 
 
 ## Project tasks
