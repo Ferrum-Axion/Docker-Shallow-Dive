@@ -1,0 +1,10 @@
+
+services:
+  ssh-server:
+    build: .
+    container_name: ssh_legacy_app
+    ports:
+      - "2222:22"
+    volumes:
+      - .:/app
+    restart: unless-stopped
